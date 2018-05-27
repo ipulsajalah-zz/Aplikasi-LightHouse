@@ -12,6 +12,21 @@ public class MBTICalculator {
     // Judging vs Perceiving
     private MBTISection JP;
 
+    public String getResult(){
+        StringBuilder output = new StringBuilder();
+        String section1 = EI.getLeft() > EI.getRight() ? "E" : "I";
+        String section2 = SN.getLeft() > SN.getRight() ? "S" : "N";
+        String section3 = TF.getLeft() > TF.getRight() ? "T" : "F";
+        String section4 = JP.getLeft() > JP.getRight() ? "J" : "P";
+
+        output.append(section1)
+                .append(section2)
+                .append(section3)
+                .append(section4);
+
+        return output.toString();
+    }
+
     /**
      * @return the EI
      */
@@ -23,7 +38,7 @@ public class MBTICalculator {
      * @param EI the EI to set
      */
     public void setEI(MBTISection EI) {
-        if(EI.getLeft1() != EI.getRight1()) this.EI = EI;
+        if(EI.getLeft() != EI.getRight()) this.EI = EI;
     }
 
     /**
@@ -37,7 +52,7 @@ public class MBTICalculator {
      * @param SN the SN to set
      */
     public void setSN(MBTISection SN) {
-        if(SN.getLeft2() != SN.getRight2()) this.SN = SN;
+        if(SN.getLeft() != SN.getRight()) this.SN = SN;
     }
 
     /**
@@ -51,7 +66,7 @@ public class MBTICalculator {
      * @param TF the TF to set
      */
     public void setTF(MBTISection TF) {
-        if(TF.getLeft3() != TF.getRight3()) this.TF = TF;
+        if(TF.getLeft() != TF.getRight()) this.TF = TF;
     }
 
     /**
@@ -65,44 +80,32 @@ public class MBTICalculator {
      * @param JP the JP to set
      */
     public void setJP(MBTISection JP) {
-        if(JP.getLeft4() != JP.getRight4()) this.JP = JP;
+        if(JP.getLeft() != JP.getRight()) this.JP = JP;
     }
 
-    public String getResult(){
-        StringBuilder output = new StringBuilder();
-        String section1 = EI.getLeft1() > EI.getRight1() ? "E" : "I";
-        String section2 = SN.getLeft2() > SN.getRight2() ? "S" : "N";
-        String section3 = TF.getLeft3() > TF.getRight3() ? "T" : "F";
-        String section4 = JP.getLeft4() > JP.getRight4() ? "J" : "P";
-
-        output.append(section1)
-                .append(section2)
-                .append(section3)
-                .append(section4);
-
-        return output.toString();
-    }
 
     public static void main(String[] args) {
         MBTISection section1 = new MBTISection();
-        section1.addRight1();
-        section1.addLeft1();
+        // pencet kanan
+        section1.addRight();
+        // pencet kiri
+        section1.addLeft();
+
+        // bikin sampai section 4
         MBTISection section2 = new MBTISection();
-        section2.addRight2();
-        section2.addLeft2();
         MBTISection section3 = new MBTISection();
-        section3.addRight3();
-        section3.addLeft3();
         MBTISection section4 = new MBTISection();
-        section4.addRight4();
-        section4.addLeft4();
+
+
+        // begitu seterusnya
+        // terakhir :
         MBTICalculator mbtiCalculator = new MBTICalculator();
         mbtiCalculator.setEI(section1);
         mbtiCalculator.setSN(section2);
         mbtiCalculator.setTF(section3);
         mbtiCalculator.setJP(section4);
-
+        // liat hasil panggil method getResult
         mbtiCalculator.getResult();
-        Log.d("hasil", String.valueOf(mbtiCalculator.getSN()));
+
     }
 }
