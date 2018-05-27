@@ -7,8 +7,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class Survei extends AppCompatActivity {
-    String pilihanKiri1[] = {
+public class Survei extends AppCompatActivity implements View.OnClickListener {
+
+
+    int questionPerGroup = 11;
+
+    String leftText[] = {
             "Dikerjakan beramai-ramai",
             "Menyapa duluan",
             "Cerewet",
@@ -54,7 +58,7 @@ public class Survei extends AppCompatActivity {
             "Rapi",
             "Terencana"
     };
-    String pilihanKanan1[] = {
+    String rightText[] = {
             "Dikerjakan sendiri",
             "Menunggu disapa",
             "Pendiam",
@@ -101,105 +105,106 @@ public class Survei extends AppCompatActivity {
             "Spontan"
     };
 
-    String header[] = {
+    String headerList[] = {
             "YANG MEMBUAT SAYA BERSEMANGAT :",
             "YANG PENTING UNTUK SAYA :",
             "CARA SAYA MENGAMBIL KEPUTUSAN :",
             "CARA SAYA MENJALANI HIDUP :"
     };
-    int h = 0;
-    int i = 0;
-    int tampil;
-    int jmlKiri = 0;
-    int jmlKanan = 0;
-    public void setHeader(){
-        if (i >= 0 && i <= 11){
-            tampil = 0;
-        }else if (i >= 12 && i <= 22){
-            tampil = 1;
-        }else if (i >= 23 && i <= 33){
-            tampil = 2 ;
-        }else if (i >= 34 &&  i <= 44){
-            tampil = 3;
-        }
-    }
 
+    int current = 0;
+
+    Button leftOption;
+    Button rightOption;
+    TextView title;
+
+    MBTISection currentSection;
     MBTISection section1 = new MBTISection();
-     MBTISection section2 = new MBTISection();
-     MBTISection section3 = new MBTISection();
-     MBTISection section4 = new MBTISection();
-    public void addLeft(){
-        if (h >= 0 && h <= 11){
-            section1.addLeft1();
-             Log.d("kiri 1",String.valueOf(section1.getLeft1()));
-        }else if (h >= 12 && h <= 22){
-            section2.addLeft2();
-            Log.d("kiri 2",String.valueOf(section2.getLeft2()));
-        }else if (h >= 23 && h <= 33){
-            section3.addLeft3();
-             Log.d("kiri 3",String.valueOf(section3.getLeft3()));
-        }else if (h >= 34 &&  h <= 44){
-            section4.addLeft4();
-            Log.d("kiri 4",String.valueOf(section4.getLeft4()));
-        }
+    MBTISection section2 = new MBTISection();
+    MBTISection section3 = new MBTISection();
+    MBTISection section4 = new MBTISection();
 
-    }
-    public void addRight(){
-        if (h >= 0 && h <= 11){
-            section1.addRight1();
-             Log.d("Kanan 1",String.valueOf(section1.getRight1()));
-        }else if (h >= 12 && h <= 22){
-            section2.addRight2();
-             Log.d("Kanan 2",String.valueOf(section2.getRight2()));
-        }else if (h >= 23 && h <= 33){
-            section3.addRight3();
-             Log.d("Kanan 3",String.valueOf(section3.getRight3()));
-        }else if (h >= 34 &&  h <= 44){
-            section4.addRight4();
-             Log.d("Kanan 4",String.valueOf(section4.getRight4()));
+
+    public void addLeft() {
+        if (current <= 11) {
+            section1.addLeft();
+            Log.d("kiri :", String.valueOf(section1.getLeft()));
+        } else if (current <= 22) {
+            section2.addLeft();
+            Log.d("kiri :", String.valueOf(section2.getLeft()));
+        } else if (current <= 33) {
+            section3.addLeft();
+            Log.d("kiri :", String.valueOf(section3.getLeft()));
+        } else if (current <= 44) {
+            section4.addLeft();
+            Log.d("kiri :", String.valueOf(section4.getLeft()));
         }
     }
+
+    public void addRight() {
+        if (current <= 11) {
+            section1.addRight();
+            Log.d("Kanan :", String.valueOf(section1.getRight()));
+        } else if (current <= 22) {
+            section2.addRight();
+            Log.d("Kanan :", String.valueOf(section2.getRight()));
+        } else if (current <= 33) {
+            section3.addRight();
+            Log.d("Kanan :", String.valueOf(section3.getRight()));
+        } else if (current <= 44) {
+            section4.addRight();
+            Log.d("Kanan :", String.valueOf(section4.getRight()));
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_survei);
-        Button  pilihKiri = (Button) findViewById(R.id.button1);
-        Button  pilihKanan = (Button) findViewById(R.id.button2);
-        TextView view = (TextView) findViewById(R.id.textView1);
-        pilihKiri.setText(pilihanKiri1[h++]);
-        pilihKanan.setText(pilihanKanan1[i++]);
-        view.setText(header[tampil]);
-        
-        pilihKiri.setOnClickListener(new View.OnClickListener()
-        {
-            Button button1 = (Button) findViewById(R.id.button1);
-            Button button2 = (Button) findViewById(R.id.button2);
-            TextView view = (TextView) findViewById(R.id.textView1);
-            @Override
-            public void onClick(View v) {
-                jmlKiri++;
-                button1.setText(pilihanKiri1[h++]);
-                button2.setText(pilihanKanan1[i++]);
-                setHeader();
+        leftOption =  findViewById(R.id.leftOption);
+        rightOption = findViewById(R.id.rightOption);
+        title = findViewById(R.id.title);
+
+        leftOption.setText(leftText[0]);
+        rightOption.setText(rightText[0]);
+        title.setText(headerList[0]);
+
+        leftOption.setOnClickListener(this);
+        rightOption.setOnClickListener(this);
+
+    }
+
+    @Override
+    public void onClick(View view) {
+
+        switch (view.getId()){
+            case R.id.leftOption:
                 addLeft();
-                view.setText(header[tampil]);
-            }
-        });
-
-        pilihKanan.setOnClickListener(new View.OnClickListener() {
-            Button button1 = (Button) findViewById(R.id.button1);
-            Button button2 = (Button) findViewById(R.id.button2);
-            TextView view = (TextView) findViewById(R.id.textView1);
-
-            @Override
-            public void onClick(View v) {
-                jmlKanan++;
-                button1.setText(pilihanKiri1[h++]);
-                button2.setText(pilihanKanan1[i++]);
-                setHeader();
+                break;
+            case R.id.rightOption:
                 addRight();
-                view.setText(header[tampil]);
+                break;
+        }
+
+        current++;
+
+        if(current < leftText.length) {
+            // tampilkan pertanyaan berikut
+            leftOption.setText(leftText[current]);
+            rightOption.setText(rightText[current]);
+
+            // saatnya ganti judul
+            if(current % questionPerGroup == 0) {
+                int group = (int) Math.floor(current / questionPerGroup);
+                title.setText(headerList[group]);
             }
-        });
+        } else { // final calculation
+            MBTICalculator mbtiCalculator = new MBTICalculator();
+            mbtiCalculator.setEI(section1);
+            mbtiCalculator.setSN(section2);
+            mbtiCalculator.setTF(section3);
+            mbtiCalculator.setJP(section4);
+            Log.i("survey result", mbtiCalculator.getResult());
+        }
     }
 }
