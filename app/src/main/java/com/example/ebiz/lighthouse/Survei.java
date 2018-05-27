@@ -161,7 +161,7 @@ public class Survei extends AppCompatActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_survei);
-        leftOption =  findViewById(R.id.leftOption);
+        leftOption = findViewById(R.id.leftOption);
         rightOption = findViewById(R.id.rightOption);
         title = findViewById(R.id.title);
 
@@ -177,7 +177,7 @@ public class Survei extends AppCompatActivity implements View.OnClickListener {
     @Override
     public void onClick(View view) {
 
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.leftOption:
                 addLeft();
                 break;
@@ -188,13 +188,13 @@ public class Survei extends AppCompatActivity implements View.OnClickListener {
 
         current++;
 
-        if(current < leftText.length) {
+        if (current < leftText.length) {
             // tampilkan pertanyaan berikut
             leftOption.setText(leftText[current]);
             rightOption.setText(rightText[current]);
 
             // saatnya ganti judul
-            if(current % questionPerGroup == 0) {
+            if (current % questionPerGroup == 0) {
                 int group = (int) Math.floor(current / questionPerGroup);
                 title.setText(headerList[group]);
             }
