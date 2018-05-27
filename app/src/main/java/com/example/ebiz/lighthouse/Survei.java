@@ -123,6 +123,7 @@ public class Survei extends AppCompatActivity {
             tampil = 3;
         }
     }
+
     MBTISection section1 = new MBTISection();
      MBTISection section2 = new MBTISection();
      MBTISection section3 = new MBTISection();
