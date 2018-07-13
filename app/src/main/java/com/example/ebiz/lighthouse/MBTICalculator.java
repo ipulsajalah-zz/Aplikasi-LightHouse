@@ -12,7 +12,7 @@ public class MBTICalculator {
     // Judging vs Perceiving
     private MBTISection JP;
 
-    public String getResult(){
+    public String getResult() {
         StringBuilder output = new StringBuilder();
         String section1 = EI.getLeft() > EI.getRight() ? "E" : "I";
         String section2 = SN.getLeft() > SN.getRight() ? "S" : "N";
@@ -38,7 +38,7 @@ public class MBTICalculator {
      * @param EI the EI to set
      */
     public void setEI(MBTISection EI) {
-        if(EI.getLeft() != EI.getRight()) this.EI = EI;
+        if (EI.getLeft() != EI.getRight()) this.EI = EI;
     }
 
     /**
@@ -52,7 +52,7 @@ public class MBTICalculator {
      * @param SN the SN to set
      */
     public void setSN(MBTISection SN) {
-        if(SN.getLeft() != SN.getRight()) this.SN = SN;
+        if (SN.getLeft() != SN.getRight()) this.SN = SN;
     }
 
     /**
@@ -66,7 +66,7 @@ public class MBTICalculator {
      * @param TF the TF to set
      */
     public void setTF(MBTISection TF) {
-        if(TF.getLeft() != TF.getRight()) this.TF = TF;
+        if (TF.getLeft() != TF.getRight()) this.TF = TF;
     }
 
     /**
@@ -80,7 +80,7 @@ public class MBTICalculator {
      * @param JP the JP to set
      */
     public void setJP(MBTISection JP) {
-        if(JP.getLeft() != JP.getRight()) this.JP = JP;
+        if (JP.getLeft() != JP.getRight()) this.JP = JP;
     }
 
 
